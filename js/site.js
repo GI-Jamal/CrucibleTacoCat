@@ -1,46 +1,46 @@
 function getValues() {
+  
   let userInput = document.getElementById('message').value;
 
-
   let palindromeResults = checkForPalindrome(userInput);
-
+ 
   displayResults(palindromeResults);
+
+  
+
 }
 
 function checkForPalindrome(message) {
-  let results = '';
+  let results = "";
 
-  for (i = message.length - 1; i >=0; i--)
-  {
+  message = message.replaceAll(/[^a-zA-Z]/g, '');
+
+  for (i = message.length - 1; i >= 0; i--) {
     results += message[i];
   }
 
-  if (results == message)
-  {
+  if (results.toLowerCase() == message.toLowerCase()) {
     return [true, results];
-  }
-
-  else
-  {
+  } else {
     return [false, results];
   }
 }
 
 function displayResults(results) {
-
-
   document.getElementById("msg").textContent = results[1];
-  
-  if (results[0] == true)
-  {
-    
+  document.getElementById("alert").classList.remove("alert-danger");
+  document.getElementById("alert").classList.remove("alert-success");
+
+  if (results[0] == true) {
     document.getElementById("alert").classList.add("alert-success");
-    document.getElementById('resultsMessage').innerText = 'Success! Your string is a palindrome.'
-  }
-  else
-  {
+    document.getElementById("resultsMessage").innerText =
+      "Success! Your string is a palindrome.";
+  } else {
     document.getElementById("alert").classList.add("alert-danger");
-    document.getElementById("resultsMessage").innerText = "Failure! Your string is not a palindrome.";
+    document.getElementById("resultsMessage").innerText =
+      "Failure! Your string is not a palindrome.";
   }
   document.getElementById("alert").classList.remove("d-none");
 }
+
+
