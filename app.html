@@ -121,10 +121,10 @@
           <button class="btn btn-primary my-1" id="btnSubmit">
             Display Message
           </button>
-          <hr/>
+          <hr />
           <div class="alert mt-5 d-none" id="alert" role="alert">
             <h4 class="alert-heading" id="resultsMessage"></h4>
-            <hr/>
+            <hr />
             <p class="mb-0" id="msg"></p>
           </div>
         </div>
@@ -176,9 +176,16 @@
     <!-- App Custom JS -->
     <script src="/js/site.js"></script>
     <script>
+      document.getElementById("btnSubmit").addEventListener("click", getValues);
+
       document
-        .getElementById("btnSubmit")
-        .addEventListener("click", getValues);
+        .getElementById("message")
+        .addEventListener("keyup", function(event) {
+          event.preventDefault();
+          if (event.key === "Enter") {
+            document.getElementById("btnSubmit").click();
+          }
+        });
     </script>
   </body>
 </html>
