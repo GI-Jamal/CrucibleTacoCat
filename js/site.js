@@ -1,19 +1,24 @@
 function getValues() {
-  
-  let userInput = document.getElementById('message').value;
+  let userInput = document.getElementById("message").value.trim();
 
-  let palindromeResults = checkForPalindrome(userInput);
- 
-  displayResults(palindromeResults);
+  if (userInput == "") {
+    Swal.fire({
+      icon: "error",
+      title: "Oops!",
+      text: "Please enter some text",
+      heightAuto: false,
+    });
+  } else {
+    let palindromeResults = checkForPalindrome(userInput);
 
-  
-
+    displayResults(palindromeResults);
+  }
 }
 
 function checkForPalindrome(message) {
   let results = "";
 
-  message = message.replaceAll(/[^a-zA-Z]/g, '');
+  message = message.replaceAll(/[^a-zA-Z]/g, "");
 
   for (i = message.length - 1; i >= 0; i--) {
     results += message[i];
@@ -42,5 +47,3 @@ function displayResults(results) {
   }
   document.getElementById("alert").classList.remove("d-none");
 }
-
-
