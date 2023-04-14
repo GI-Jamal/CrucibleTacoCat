@@ -181,8 +181,8 @@
       document
         .getElementById("message")
         .addEventListener("keyup", function(event) {
-          event.preventDefault();
           if (event.key === "Enter") {
+            event.preventDefault();
             document.getElementById("btnSubmit").click();
           }
         });
