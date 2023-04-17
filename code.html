@@ -111,9 +111,15 @@
           <pre class="line-numbers">
                     <code class="language-js">
 function getValues() {
-  let userInput = document.getElementById("message").value.trim();
+  document.getElementById("alert").classList.remove("alert-danger");
+  document.getElementById("alert").classList.remove("alert-success");
+  document.getElementById("alert").classList.add("d-none");
 
-  if (userInput == "") {
+  let userInput = document.getElementById("message").value;
+
+  checkInput = userInput.replaceAll(/[^a-zA-Z0-9]/g, "");
+
+  if (checkInput == "") {
     Swal.fire({
       icon: "error",
       title: "Oops!",
@@ -129,24 +135,28 @@ function getValues() {
 
 function checkForPalindrome(message) {
   let results = "";
+  let reverseMessage = "";
 
-  message = message.replaceAll(/[^a-zA-Z]/g, "");
+  messageSanitized = message.replaceAll(/[^a-zA-Z0-9]/g, "");
 
-  for (i = message.length - 1; i >= 0; i--) {
-    results += message[i];
+  for (i = messageSanitized.length - 1; i >= 0; i--) {
+    results += messageSanitized[i];
   }
 
-  if (results.toLowerCase() == message.toLowerCase()) {
-    return [true, results];
+  for (i = message.length - 1; i >= 0; i--)
+  {
+    reverseMessage += message[i]
+  }
+
+  if (results.toLowerCase() == messageSanitized.toLowerCase()) {
+    return [true, reverseMessage];
   } else {
-    return [false, results];
+    return [false, reverseMessage];
   }
 }
 
 function displayResults(results) {
   document.getElementById("msg").textContent = results[1];
-  document.getElementById("alert").classList.remove("alert-danger");
-  document.getElementById("alert").classList.remove("alert-success");
 
   if (results[0] == true) {
     document.getElementById("alert").classList.add("alert-success");
@@ -160,13 +170,57 @@ function displayResults(results) {
   document.getElementById("alert").classList.remove("d-none");
 }
 
+
                     </code>
                 </pre>
         </div>
         <div class="col-lg-4 col-12">
-          <p>The code is structured in one function</p>
-          <h5>displaMessage</h5>
-          <p>print out the message</p>
+          <p>The code is structured in three functions</p>
+          <h5>getValues():</h5>
+          <p>
+            The getValue function retrieves the text string input by the user by
+            storing the value of the HTML element with an ID of "message" into a
+            variable name userInput. This input is sanitzed of all non number
+            and letter characters, and is then checked to ensure it is not just
+            an empty string. 
+          </p>
+          <p>
+            If an empty string is detected than an alert is
+            fired, otherwise the function passes the userInput value to another
+            function titled checkForPalindrome(). The results of this function
+            are stored and then passed to the displayResults() function.
+          </p>
+          <hr />
+          <h5>checkForPalindrome(message):</h5>
+          <p>
+            The checkForPalindrome() function take the argument passed to it and 
+          </p>
+          <p>
+            It does this by using a for loop to iterate through each number to
+            add it to the array. It then returns this filled array to the
+            caller.
+          </p>
+          <hr />
+          <h5>displayResults(results):</h5>
+          <p>
+            The displayNumbers function take a single parameter of an array of
+            numbers and displays the numbers in a table with the even numbers
+            displayed in bold and red. It does this by manipulating the
+            innerHTML property of the document element that has an Id of
+            results.
+          </p>
+          <p>
+            In this case it is a tbody tag. The function creates a variable to
+            store the HTML string for the numbers, and then iterates through the
+            array of numbers, determining if a number is even by using the
+            modulus operator, then adds string of HTML text to the results
+            variable, with even numbers having a CSS class of evenNumbers added
+            to them.
+          </p>
+          <p>
+            This results variable is then assigned to the innerHTML property of
+            the tbody tag display the numbers in a tabular format.
+          </p>
         </div>
       </div>
     </main>
