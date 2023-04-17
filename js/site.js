@@ -1,6 +1,10 @@
 function getValues() {
   let userInput = document.getElementById("message").value.trim();
 
+  userInput = userInput.replaceAll(/[^a-zA-Z]/g, "");
+
+  document.getElementById("alert").classList.add("d-none");
+
   if (userInput == "") {
     Swal.fire({
       icon: "error",
@@ -17,8 +21,6 @@ function getValues() {
 
 function checkForPalindrome(message) {
   let results = "";
-
-  message = message.replaceAll(/[^a-zA-Z]/g, "");
 
   for (i = message.length - 1; i >= 0; i--) {
     results += message[i];
