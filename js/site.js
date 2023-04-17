@@ -1,11 +1,13 @@
 function getValues() {
-  let userInput = document.getElementById("message").value.trim();
-
-  userInput = userInput.replaceAll(/[^a-zA-Z]/g, "");
-
+  document.getElementById("alert").classList.remove("alert-danger");
+  document.getElementById("alert").classList.remove("alert-success");
   document.getElementById("alert").classList.add("d-none");
 
-  if (userInput == "") {
+  let userInput = document.getElementById("message").value;
+
+  checkInput = userInput.replaceAll(/[^a-zA-Z0-9]/g, "");
+
+  if (checkInput == "") {
     Swal.fire({
       icon: "error",
       title: "Oops!",
@@ -21,22 +23,28 @@ function getValues() {
 
 function checkForPalindrome(message) {
   let results = "";
+  let reverseMessage = "";
 
-  for (i = message.length - 1; i >= 0; i--) {
-    results += message[i];
+  messageSanitized = message.replaceAll(/[^a-zA-Z0-9]/g, "");
+
+  for (i = messageSanitized.length - 1; i >= 0; i--) {
+    results += messageSanitized[i];
   }
 
-  if (results.toLowerCase() == message.toLowerCase()) {
-    return [true, results];
+  for (i = message.length - 1; i >= 0; i--)
+  {
+    reverseMessage += message[i]
+  }
+
+  if (results.toLowerCase() == messageSanitized.toLowerCase()) {
+    return [true, reverseMessage];
   } else {
-    return [false, results];
+    return [false, reverseMessage];
   }
 }
 
 function displayResults(results) {
   document.getElementById("msg").textContent = results[1];
-  document.getElementById("alert").classList.remove("alert-danger");
-  document.getElementById("alert").classList.remove("alert-success");
 
   if (results[0] == true) {
     document.getElementById("alert").classList.add("alert-success");
