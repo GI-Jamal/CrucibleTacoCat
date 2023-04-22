@@ -1,3 +1,10 @@
+const tooltipTriggerList = document.querySelectorAll(
+  '[data-bs-toggle="tooltip"]'
+);
+const tooltipList = [...tooltipTriggerList].map(
+  (tooltipTriggerEl) => new bootstrap.Tooltip(tooltipTriggerEl)
+);
+
 function getValues() {
   document.getElementById("alert").classList.remove("alert-danger");
   document.getElementById("alert").classList.remove("alert-success");
@@ -31,9 +38,8 @@ function checkForPalindrome(message) {
     results += messageSanitized[i];
   }
 
-  for (i = message.length - 1; i >= 0; i--)
-  {
-    reverseMessage += message[i]
+  for (i = message.length - 1; i >= 0; i--) {
+    reverseMessage += message[i];
   }
 
   if (results.toLowerCase() == messageSanitized.toLowerCase()) {
