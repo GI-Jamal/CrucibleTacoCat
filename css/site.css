@@ -307,7 +307,8 @@ footer {
 @media (min-width: 666px) and (max-width: 767px) {
   .appLogo {
     margin-bottom: 1.1rem;
-    max-width: 270px;
+    max-width: 271px;
+    max-height: 271px;
   }
 
   .mainMargins {
